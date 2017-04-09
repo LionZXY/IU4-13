@@ -1,5 +1,7 @@
 # Инженерная графика
-## Преподователи:
+## Преподователи
 - Гузненков Владимир Николаевич
 - Головачева Людмила Ивановна
-AutoDesk [Скачать](http://www.autodesk.ru/education/country-gateway)
+## Полезные ссылки
+- [AutoDesk](http://www.autodesk.ru/education/country-gateway)
+- [Построение эскиза, ответы на вопросы](http://grigaa2008.narod.ru/all.htm) (РК2)
