@@ -12,4 +12,8 @@ char *getLine();
 
 int getUInt();
 
+void clearscr(void);
+
+void clearinput();
+
 #endif //IU4_DATABASE_READER_H

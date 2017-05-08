@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "books.h"
-#include "../reader.h"
+#include "../utils/reader.h"
 
 const char *BOOKS_FILE = "books.csv";
 const char SEPARATOR_CHAR = ';';
