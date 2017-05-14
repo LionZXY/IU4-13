@@ -2,6 +2,7 @@
 #include <libio.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 #include "reader.h"
 
 const int START_BUFFER = 16;
@@ -53,7 +54,7 @@ char *getLine() {
     char *tmp = (char *) malloc(sizeof(char) * bufferSize);
     int tmpChar = 0;
     while ((tmpChar = getchar()) != '\n') {
-        if(tmpChar == EOF)
+        if (tmpChar == EOF)
             continue;
         tmp[size++] = (char) tmpChar;
         if (size == bufferSize) {
@@ -63,6 +64,28 @@ char *getLine() {
     }
     tmp[size] = '\0';
     return tmp;
+}
+
+char *nextWord() {
+    int bufferSize = START_BUFFER;
+    int count = 0;
+    char *word = (char *) calloc((size_t) bufferSize, sizeof(char));
+    int tmpChar = 0;
+    while ((tmpChar = getchar()) != EOF && tmpChar != '\n') {
+        if (tmpChar == ' ')
+            continue;
+        word[count++] = (char) tmpChar;
+        if (count == bufferSize) {
+            bufferSize *= 1.5;
+            word = (char *) realloc(word, bufferSize * sizeof(char));
+        }
+    }
+    word[count] = '\0';
+    if (count == 0) {
+        free(word);
+        word = NULL;
+    }
+    return word;
 }
 
 int getUInt() {
@@ -80,19 +103,30 @@ int getUInt() {
         return var;
     else return -1;
 }
-void clearinput(){
-    while(getchar()!='\n'); // option TWO to clean stdin
+
+void clearinput() {
+    while (getchar() != '\n'); // option TWO to clean stdin
 }
 
-void clearscr(void)
-{
+void clearscr(void) {
 #ifdef _WIN32
     system("cls");
 #elif defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))
     system("clear");
 //add some other OSes here if needed
 #else
-    #error "OS not supported."
+#error "OS not supported."
     //you can also throw an exception indicating the function can't be used
 #endif
+}
+
+/**
+ * Строка должна быть нультерменированная!
+ * @param str
+ * @return
+ */
+char *copyString(char *str) {
+    char *toReturn = malloc(strlen(str) * sizeof(char) + 1);
+    toReturn = strcpy(toReturn, str);
+    return toReturn;
 }

@@ -12,8 +12,12 @@ char *getLine();
 
 int getUInt();
 
+char *nextWord();
+
 void clearscr(void);
 
 void clearinput();
+
+char *copyString(char *str);
 
 #endif //IU4_DATABASE_READER_H

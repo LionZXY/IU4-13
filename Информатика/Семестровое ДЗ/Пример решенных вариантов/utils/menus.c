@@ -1,10 +1,21 @@
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "reader.h"
 #include "../databases/books.h"
 #include "../databases/students.h"
+#include "hashmap.h"
+#include "../databases/users.h"
 
-int openRootMenu() {
+int openRootMenu(User *user) {
+    if (!user->permissionStudent || !user->permissionBook) {
+        if (user->permissionBook)
+            return 1;
+        else if (user->permissionStudent)
+            return 2;
+        else printf("Ты, вообще, зачем открыл программу, если у тебя нет никаких прав??");
+        return 0;
+    }
     clearscr();
     int input = 0;
 
@@ -20,7 +31,11 @@ int openRootMenu() {
     return input;
 }
 
-int openBookMenu() {
+int openBookMenu(User *user) {
+    if (!user->permissionBook) {
+        printf("У вас нет прав для этого");
+        return 0;
+    }
     clearscr();
     int input = 0;
 
@@ -205,7 +220,11 @@ BookTable *doItBook(int input, BookTable *table) {
     return table;
 }
 
-int openStudentMenu() {
+int openStudentMenu(User *user) {
+    if (!user->permissionStudent) {
+        printf("У вас нет прав для этого");
+        return 0;
+    }
     clearscr();
     int input = 0;
 
@@ -368,10 +387,30 @@ StudentTable *doItStudent(int input, StudentTable *table) {
             break;
         }
         default:
-            printf("Нет такого пункта меню");
+            printf("Нет такого пункта меню\n");
     }
     printf("Нажмите [Enter] для продолжения.\n");
     clearinput();
     getchar();
     return table;
+}
+
+User *auth(UserTable *userTable) {
+    char *login;
+    char *password;
+    printf("Введите логин: ");
+    login = getLine();
+    printf("Введите пароль: ");
+    password = getLine();
+    User *user = findUser(userTable, login);
+    if (user == NULL || strcmp(user->password, password)) {
+        printf("Неправильный логин или пароль!\n");
+        free(login);
+        free(password);
+        return auth(userTable);
+    } else
+        printf("Авторизация успешна!\n");
+    free(login);
+    free(password);
+    return user;
 }

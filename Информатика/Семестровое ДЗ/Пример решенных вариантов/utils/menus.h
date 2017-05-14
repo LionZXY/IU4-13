@@ -7,12 +7,19 @@
 
 #include "../databases/books.h"
 #include "../databases/students.h"
+#include "hashmap.h"
+#include "../databases/users.h"
 
-int openRootMenu();
-int openStudentMenu();
-int openBookMenu();
+int openRootMenu(User * user);
+
+int openStudentMenu(User * user);
+
+int openBookMenu(User * user);
 
 BookTable *doItBook(int input, BookTable *table);
+
 StudentTable *doItStudent(int input, StudentTable *table);
+
+User *auth(UserTable *userTable);
 
 #endif //IU4_DATABASE_MENUS_H
