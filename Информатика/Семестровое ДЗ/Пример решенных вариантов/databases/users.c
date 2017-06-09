@@ -41,7 +41,7 @@ UserTable *loadUserTable(const char *filename) {
 }
 
 void saveToFile(HashNode *hashNode, void *file) {
-    fprintf((FILE *) file, "%s%c%s%c%d%c%d", hashNode->user->login, SEPARATOR_CHAR_USER,
+    fprintf((FILE *) file, "%s%c%s%c%d%c%d\n", hashNode->user->login, SEPARATOR_CHAR_USER,
             hashNode->user->password, SEPARATOR_CHAR_USER,
             hashNode->user->permissionBook ? 1 : 0, SEPARATOR_CHAR_USER,
             hashNode->user->permissionStudent ? 1 : 0);

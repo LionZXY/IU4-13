@@ -25,9 +25,13 @@ int openRootMenu(User *user) {
     printf("2. Открыть меню студентов\n");
     printf("0. Завершить работу программы\n");
     printf("Выберите пункт меню: ");
-    scanf("%d", &input);
+    input = getUInt();
     printf("===============================================\n");
 
+    if (input < 0 || input > 2) {
+        printf("Неверный ввод\n");
+        return openRootMenu(user);
+    }
     return input;
 }
 
@@ -54,9 +58,13 @@ int openBookMenu(User *user) {
     printf("11. Поиск по фамилии автора\n");
     printf("0. Вернуться в главное меню\n");
     printf("Выберите пункт меню: ");
-    scanf("%d", &input);
+    input = getUInt();
     printf("===============================================\n");
 
+    if (input < 0 || input > 11) {
+        printf("Неверный ввод\n");
+        return openBookMenu(user);
+    }
     return input;
 }
 
@@ -239,9 +247,12 @@ int openStudentMenu(User *user) {
     printf("7. Поиск по фамилии студента\n");
     printf("0. Вернуться в главное меню\n");
     printf("Выберите пункт меню: ");
-    scanf("%d", &input);
+    input = getUInt();
     printf("===============================================\n");
-
+    if (input < 0 || input > 7) {
+        printf("Неверный ввод\n");
+        return openStudentMenu(user);
+    }
     return input;
 }
 
