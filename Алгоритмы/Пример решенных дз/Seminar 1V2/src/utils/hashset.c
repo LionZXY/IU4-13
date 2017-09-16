@@ -7,11 +7,17 @@
 const float MAX_CONTAINS = 0.75F;
 const int START_BUFFER_SIZE = 8;
 
+unsigned int hashInt(int num, int tableSize);
+
+hashFunctionDef hashFunction = &hashInt;
+
 void initHashSetFromArray(HashSet *hashSet, ArrayList *list) {
-    hashSet->bufferSize = START_BUFFER_SIZE;
+    hashSet->bufferSize = (int) (list->realSize / MAX_CONTAINS);
     hashSet->size = 0;
     hashSet->buffers = calloc((size_t) hashSet->bufferSize, sizeof(HashNode *));
-
+    for (int i = 0; i < list->realSize; i++) {
+        putInHashSet(hashSet, list->array[i]);
+    }
 }
 
 void initHashSet(HashSet *hashSet) {
@@ -26,7 +32,7 @@ HashNode *getHashNode(HashSet *hashSet, HASH_KEY key) {
 
     HashNode *hashNode = hashSet->buffers[hsh];
     while (hashNode != NULL) {
-        if (!strcmp(hashNode->key, key))
+        if (hashNode->key == key)
             return hashNode;
         else hashNode = hashNode->next;
     }
@@ -40,7 +46,6 @@ bool containsInHashSet(HashSet *hashSet, HASH_KEY key) {
 
 
 void freeNode(HashNode *node, void *shared) {
-    free(node->key);
 }
 
 bool removeFromHashSet(HashSet *hashSet, HASH_KEY key) {
@@ -50,7 +55,7 @@ bool removeFromHashSet(HashSet *hashSet, HASH_KEY key) {
     HashNode *hashNode = hashSet->buffers[hsh];
     if (hashNode == NULL)
         return false;
-    if (!strcmp(hashNode->key, key)) {
+    if (hashNode->key == key) {
         freeNode(hashNode, NULL);
         hashSet->buffers[hsh] = NULL;
         hashSet->size--;
@@ -58,7 +63,7 @@ bool removeFromHashSet(HashSet *hashSet, HASH_KEY key) {
     }
     HashNode *tmp;
     while (hashNode->next != NULL) {
-        if (!strcmp(hashNode->key, key)) {
+        if (hashNode->key == key) {
             tmp = hashNode->next;
             hashNode->next = tmp->next;
             freeNode(tmp, NULL);
@@ -85,12 +90,10 @@ void rehash(HashSet *hashSet) {
             while (tmp->next != NULL) {
                 tmp2 = tmp->next;
                 putInHashSet(hashSet, tmp->key);
-                free(tmp->key);
                 free(tmp);
                 tmp = tmp2;
             }
             putInHashSet(hashSet, tmp->key);
-            free(tmp->key);
             free(tmp);
         }
     }
@@ -105,10 +108,10 @@ bool putInHashSet(HashSet *hashSet, HASH_KEY key) {
 
     HashNode *node = hashSet->buffers[hsh];
     if (node != NULL) {
-        if (!strcmp(key, node->key))
+        if (key == node->key)
             return false;
         while (node->next != NULL) {
-            if (strcmp(key, node->key))
+            if (key == node->key)
                 return false;
             node = node->next;
         }
@@ -118,7 +121,7 @@ bool putInHashSet(HashSet *hashSet, HASH_KEY key) {
         node = malloc(sizeof(HashNode));
         hashSet->buffers[hsh] = node;
     }
-    node->key = copyString(key);
+    node->key = key;
     node->next = NULL;
     hashSet->size++;
 
@@ -153,9 +156,6 @@ void iterratorByHashSet(HashSet *hashSet, void *shared, void (*next)(HashNode *n
 const int a = 59;
 
 // Хеш-функция строки.
-unsigned int hashStr(const HASH_KEY str, int tableSize) {
-    unsigned int hash = 0;
-    for (; *str != 0; ++str)
-        hash = (hash * a + *str) % tableSize;
-    return hash;
+unsigned int hashInt(int num, int tableSize) {
+    return (unsigned int) ((num * a) % tableSize);
 }

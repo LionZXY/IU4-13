@@ -1,5 +1,6 @@
 #include "set.h"
 #include "stdio.h"
+#include "hashset.h"
 
 /**
  * @file set.c
@@ -26,6 +27,67 @@ void printArray(ArrayList *list) {
     printf("\n");
 }
 
+void printNode(HashNode *node, void *shared) {
+    printf("%d ", node->key);
+}
+
+void combiningAndPrintSets(ArrayList *list, ArrayList *list2) {
+    HashSet setOne;
+    initHashSetFromArray(&setOne, list);
+    for (int i = 0; i < list2->realSize; i++) {
+        removeFromHashSet(&setOne, list2->array[i]); // Удаляем из первого листа все из второго
+    }
+    iterratorByHashSet(&setOne, NULL, &printNode);
+
+    // Второй лист
+    HashSet setTwo;
+    initHashSetFromArray(&setTwo, list2);
+    iterratorByHashSet(&setTwo, NULL, &printNode);
+
+    printf("\n");
+
+    freeHashSet(&setTwo);
+    freeHashSet(&setOne);
+}
+
+void ifContainsPrint(HashNode *node, void *hashSet2) {
+    HashSet *set = (HashSet *) hashSet2;
+    if (containsInHashSet(set, node->key)) {
+        printf("%d ", node->key);
+    }
+}
+
+void peresAndPrintSets(ArrayList *list, ArrayList *list2) {
+    HashSet setOne;
+    HashSet setTwo;
+    initHashSetFromArray(&setOne, list);
+    initHashSetFromArray(&setTwo, list2);
+
+    iterratorByHashSet(&setOne, &setTwo, &ifContainsPrint);
+
+    freeHashSet(&setOne);
+    freeHashSet(&setTwo);
+}
+
+void ifNotContainsPrint(HashNode *node, void *hashSet2) {
+    HashSet *set = (HashSet *) hashSet2;
+    if (!containsInHashSet(set, node->key)) {
+        printf("%d ", node->key);
+    }
+}
+
+void diffAndPrintSets(ArrayList *list, ArrayList *list2) {
+    HashSet setOne;
+    HashSet setTwo;
+    initHashSetFromArray(&setOne, list);
+    initHashSetFromArray(&setTwo, list2);
+
+    iterratorByHashSet(&setOne, &setTwo, &ifNotContainsPrint);
+
+    freeHashSet(&setOne);
+    freeHashSet(&setTwo);
+}
+
 void printAllArrays() {
     printf("На данный момент хранится %d множеств(о)\n", setArrays.realSize);
     for (int i = 0; i < setArrays.realSize; i++) {
@@ -42,9 +104,6 @@ SetArrays *getSet() {
 }
 
 void freeSets() {
-    for (int i = 0; i < setArrays.realSize; i++) {
-        free(&setArrays.lists[i]);
-    }
     free(setArrays.lists);
     setArrays.lists = NULL;
     setArrays.realSize = 0;

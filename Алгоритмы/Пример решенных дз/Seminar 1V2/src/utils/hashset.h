@@ -2,12 +2,11 @@
 #define SEMINAR_HASHSET_H
 
 // Пользовательские данные
-#define HASH_KEY const char *
+#define HASH_KEY int
 typedef unsigned int (*hashFunctionDef)(HASH_KEY key, int tableSize);
-unsigned int hashStr(const char *str, int tableSize);
-hashFunctionDef hashFunction = &hashStr;
 
 #include <stdbool.h>
+#include "../io/reader.h"
 
 struct HashNode {
     HASH_KEY key;
@@ -28,7 +27,7 @@ bool removeFromHashSet(HashSet *hashSet, HASH_KEY key);
 bool containsInHashSet(HashSet *hashSet, HASH_KEY key);
 
 void initHashSet(HashSet *hashSet);
-
+void initHashSetFromArray(HashSet *hashSet, ArrayList *list);
 void freeHashSet(HashSet *hashSet);
 
 void iterratorByHashSet(HashSet *hashSet, void *shared, void (*next)(HashNode *node, void *sharedVar));

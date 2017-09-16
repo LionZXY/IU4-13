@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "convert.h"
-#include "stdio.h"
 
 /**
  * @file convert.c

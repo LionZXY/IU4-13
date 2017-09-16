@@ -2,9 +2,11 @@
 #include "stdio.h"
 #include "io/menu.h"
 #include "utils/set.h"
+#include "utils/hashset.h"
 
 int main() {
     int select = 0;
+
     while ((select = menuMain()) != 0) {
         openSelectableMenu(select - 1);
     }

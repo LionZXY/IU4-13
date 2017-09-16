@@ -26,5 +26,8 @@ void printArray(ArrayList *list);
 void printAllArrays();
 SetArrays* getSet();
 void freeSets();
+void combiningAndPrintSets(ArrayList *list, ArrayList *list2);
+void peresAndPrintSets(ArrayList *list, ArrayList *list2);
+void diffAndPrintSets(ArrayList *list, ArrayList *list2);
 
 #endif //SEMINAR_SET_H

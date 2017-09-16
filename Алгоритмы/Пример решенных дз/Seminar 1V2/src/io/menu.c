@@ -140,9 +140,9 @@ int menuSetSelect() {
 
     printf("Чего с ними сделать?\n");
     printf("1. Просто вывести\n");
-    //printf("2. Сложить множества\n");
-    //printf("3. Делить множества\n");
-    //printf("4. Вычитать множества\n");
+    printf("2. Сложить множества\n");
+    printf("3. Пересечения множеств\n");
+    printf("4. Вычитать множества\n");
     printf("5. Я хлебушек\n");
     printf("0. Выход\n");
     int select = 0;
@@ -151,24 +151,23 @@ int menuSetSelect() {
     }
     switch (select) {
         case 1: {
-            printf("Эт мы с радостью:\n");
+            printf("Эт мы могем, эт мы с радостью:\n");
             printArray(&getSet()->lists[first]);
             printArray(&getSet()->lists[second]);
             break;
         }
-            /*
-            case 2: {
-                printf("Not Implemented\n"); //TODO
-                break;
-            }
-            case 3: {
-                printf("Not Implemented\n"); //TODO
-                break;
-            }
-            case 4: {
-                printf("Not Implemented\n"); //TODO
-                break;
-            }*/
+        case 2: {
+            combiningAndPrintSets(&getSet()->lists[first], &getSet()->lists[second]);
+            break;
+        }
+        case 3: {
+            peresAndPrintSets(&getSet()->lists[first], &getSet()->lists[second]);
+            break;
+        }
+        case 4: {
+            diffAndPrintSets(&getSet()->lists[first], &getSet()->lists[second]);
+            break;
+        }
         case 5: {
             printf("Ты хлебушек\n");
             break;
