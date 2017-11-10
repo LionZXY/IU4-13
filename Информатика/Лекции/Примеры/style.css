@@ -1,0 +1,51 @@
+p {
+	color: yellow;
+}
+
+.red-text {
+	color: red;
+	background-color: #c3c3c3;
+}
+
+.green-text {
+	color: green;
+}
+
+.red-border {
+	border: solid 1px red;
+	color: blue;
+}
+
+#p3 {
+	border: black dotted 5px;
+}
+
+#header	{
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 5px;	
+}	
+
+#nav {	
+  line-height: 30px;	
+  background-color: #eeeeee;	
+  height: 300px;	
+  width: 30%;	
+  float: left;	
+  padding: 5px;	
+}
+
+#section {	
+  width:65%;	
+  float:left;	
+  padding:10px;	
+}	
+
+#footer	{	
+  color:white;	
+  background-color: black; 
+  clear:both;	
+  text-align:center;	  	
+  padding:5px;
+}

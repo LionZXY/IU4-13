@@ -1,0 +1,10 @@
+# Опросы для социологии:
+* [Анализ уровня поддержки нынешней политической власти в России](https://docs.google.com/forms/d/1a3D_FMexhEyBZuiT1SLntqDXOuwitYbpPd41AReRY8c/viewform?edit_requested=true)
+* [Качество сети WiFi в МГТУ](https://goo.gl/forms/VVwne3q6uzILBhqI2)
+* [Отношение молодежи к спорту](https://docs.google.com/forms/d/e/1FAIpQLSeaveGDgP1u-kJMWSJ-Fu7DV_HWoRVqlShNuv9_Z68qz4LUMw/viewform)
+* [Значение социальных сетей в твоей жизни](https://docs.google.com/forms/d/e/1FAIpQLSc6ldm3zOAWoo2zcX9jqyVRMFj1kF8M_l_qbgPyB5FqnTfSKg/alreadyresp[onded)
+* [Питание в столовой](http://www.survio.com/survey/d/N0Q3O8L2L8K8V1U7A)
+* [Как хорошо вы знаете столицу](https://www.testograf.ru/ru/oprosi/aktualnie/b52a7f2653f5e55ca.html)
+* [Отношение молодежи к пожилым людям](https://docs.google.com/forms/d/1eOfVJgivLN0tUSotdeYn6oID4taSgmtDDOpy_byDSHY/viewform?edit_requested=true)
+* [Трудности выбора игровой платформы](https://docs.google.com/forms/d/e/1FAIpQLSf7hV1AOBbWM1slaOwqvd9qxIP7mUxB1k0Dnn1ia-BL8rwwvg/viewform)
+* [Доверяете ли вы СМИ](https://anketolog.ru/s/148667/hpQpXhBr)
